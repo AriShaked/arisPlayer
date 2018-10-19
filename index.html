@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>My Awesome Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="myPlayerStyle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- <script src="JQuery.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="hideShowPlayer.js"></script>
+  <script src="createInputFields.js"></script>
+  <script src="mp3Validation.js"></script>
+  <script src="bulidSongsJSON.js"></script>
+  <script src="strictValidationCantAddFields.js"></script>
+  <script src="addEditfunc.js"></script>
+  <script src="main.js"></script>
+  <style>
+    body {
+    background-color: #333;
+    font-family: 'Luckiest Guy', cursive;
+    } 
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="search-container">
+      <input type="text" id="searchBox" placeholder="Search Playlist.." name="search">
+      <button type="submit" class="glyphicon glyphicon-search"><i class="line-search"></i></button>
+    </div>
+    </div>
+    <!-- Trigger the modal with a button -->
+    <button type="button" id='addNewPlaylist' data-toggle="modal" data-target="#modal1">
+      <span class="glyphicon glyphicon-plus"></span>
+      Add New Playlist
+    </button>
+  </header>
+  <!-- Modal 1 -->
+  <div class="modalContainer">
+    <div class="modal fade" id="modal1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal 1 content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h1 class="modal-title">Add New Playlist</h1>
+          </div>
+          <div class="modal-body">
+            <h3>Playlist Name</h3>
+            <input type="text" id='newPlaylistName' />
+            <h3>Playlist URL</h3>
+            <input type="text" id='newPlaylistUrl' />
+            <div class="modal-image">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <h3>
+              <button id='addNewPlaylistBoxResetButton'>Reset Fields</button>
+              <button id='addNewPlaylistBoxNextButton' data-toggle="modal" data-target="#modal2" data-dismiss="modal"
+                disabled>Next</button>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal 2 -->
+  <div class="modal2Container">
+    <div class="modal fade" id="modal2" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal 2 content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h1 class="modal-title">Add Playlist Songs</h1>
+          </div>
+          <div class="modal2-body"><br />
+            <div class="songInput-wrapper">
+              Song URL
+              <input type="text" id='song1Url' class='inputUrl' />
+              Name
+              <input type="text" id='song1Name' class='inputName' /><br /><br />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <span class='songsLimitError' id='addSongsLimitError'>
+              <h2>12 songs limit</h2>
+            </span>
+            <span class='songsError' id='addSongsError'>
+              <h2>Please Insert At List One Song</h2>
+            </span>
+            <h3><button id='addNewPlaylistBoxAddSongfieldButton'>Add Another Song
+                <span class="glyphicon glyphicon-plus"></span>
+              </button></h3>
+            <h3><button id='addNewPlaylistBoxFinishButton' disabled>Finish & Save</button></h3>
+            <!-- data-dismiss="modal" -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal 3 -->
+  <div class="modal3Container">
+    <div class="modal fade" id="modal3" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal 3 content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <h3 class="modal-title">Delete Confirmation</h3>
+          </div>
+          <div class="modal-body">
+            <h1>Are You Sure?</h1>
+          </div>
+          <div class="modal-footer">
+            <h3><button id='deleteAlbumYesButton' data-dismiss="modal">Yes</button></h3>
+            <h3><button id='deleteAlbumCancelButton' data-dismiss="modal">Cancel</button></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal 4 -->
+  <div class="modal4Container">
+    <div class="modal fade" id="modal4" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal 4 content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h1 class="modal-title">Edit Playlist</h1>
+          </div>
+          <div class="modal-body">
+            <h3>Edit Playlist Name</h3>
+            <input type="text" id='editPlaylistName' />
+            <h3>Edit Playlist Image URL</h3>
+            <input type="text" id='editPlaylistUrl' />
+            <div class="modal-image">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <h3>
+              <button id='editNewPlaylistBoxResetButton'>Reset Fields</button>
+              <button id='editPlaylistBoxNextButton' data-toggle="modal" data-target="#modal5" data-dismiss="modal"
+                disabled>Next</button>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div class="modal5Container">
+    <div class="modal fade" id="modal5" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal 5 content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h1 class="modal-title">Edit Playlist Songs</h1>
+          </div>
+          <div class="modal5-body">
+
+          </div>
+          <div class="modal-footer">
+            <!-- <span class='editSongsLimitError' id='editAddSongsLimitError'><h2>12 songs limit</h2></span>
+                <span class='editSongsError' id='editAddSongsError'><h2>Please Insert At List One Song</h2></span> -->
+            <h3><button id='editPlaylist-Add-SongInputField-Button'>Add Another Song
+                <span class="glyphicon glyphicon-plus"></span>
+              </button></h3>
+            <h3><button id='editPlaylistBoxUpdateButton'>Update</button></h3>
+            <!-- data-dismiss="modal" -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="playerAreaXIconButton" data-toggle="modal" data-target="#modal3">
+    <span id='playerAreaXIcon' class="glyphicon glyphicon-remove"></span>
+  </button>
+  <button type="button" class="playerAreaPencilIconButton" data-toggle="modal" data-target="#modal4">
+    <span id='playerAreaPencilIcon' class="glyphicon glyphicon-pencil"></span>
+  </button>
+  <div id='player'>
+    <div id='playerListDiv'></div>
+    <div id='playerImageDiv'></div>
+    <div id='playerControlsDiv'></div>
+  </div>
+  <div id='container'>
+  </div>
+</body>
+
+</html>
