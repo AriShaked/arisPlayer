@@ -291,7 +291,6 @@ $(document).ready(function () {
             $(".song").on('mouseleave', function () {
 
                 if (this.classList.contains('strong')) {
-                    console.log("hhhhhh");
                     $(".strong span").removeClass("glyphicon glyphicon-pause");
                     $(".strong span").addClass("glyphicon glyphicon-play");
                     //  $(".strong span").Class("glyphicon glyphicon-pause");
@@ -400,6 +399,7 @@ $(document).ready(function () {
             }
         });
     }
+<<<<<<< HEAD
 /////search/////////////////////////////////////////////////////
     function searchAlbum() {
         var search = $('#searchBox').val();
@@ -426,3 +426,6 @@ $(document).ready(function () {
         }
     }
 });
+=======
+});
+>>>>>>> a6b9f23f47d8cd36b4f10fe079986c8a6f4fed62
