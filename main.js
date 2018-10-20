@@ -16,7 +16,6 @@ $(document).ready(function () {
             url: `http://localhost/playlist/api/playlist`,
             success: function (data) {
                 allAlbumsData = data;
-                $("body").data("AlbumsData", allAlbumsData);
                 drawAlbums(data.data);
             }
         });
@@ -406,7 +405,6 @@ $(document).ready(function () {
         if (search.length > 1) {
             $("#container").html("");
             var filter = search.toUpperCase();
-            // var allAlbums = $("body").data("AlbumsData");
             var allAlbums =allAlbumsData ; 
             var albumsData = allAlbums.data;
             searchResult = [];
