@@ -67,6 +67,7 @@ $(document).ready(function () {
     }
     ///////////////////// DELETE   ------  on click gets album id and send ajax delete request to the server/////
     $("#deleteAlbumYesButton").on('click', function () {
+        myAudio.pause();
         var deleteIt = $("#player").data("deleteAlbumId");
         deleteAlbum(deleteIt);
     });
@@ -313,7 +314,6 @@ $(document).ready(function () {
             $(".song").on('mouseleave', function () {
 
                 if (this.classList.contains('strong')) {
-                    console.log("hhhhhh");
                     $(".strong span").removeClass("glyphicon glyphicon-pause");
                     $(".strong span").addClass("glyphicon glyphicon-play");
                     //  $(".strong span").Class("glyphicon glyphicon-pause");
