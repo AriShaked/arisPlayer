@@ -44,7 +44,7 @@ $(document).ready(function () {
     }
     ///////////////////// DELETE   ------  on click gets album id and send ajax delete request to the server/////
     $("#deleteAlbumYesButton").on('click', function () {
-        myAudio.pause();
+
         var deleteIt = $("#player").data("deleteAlbumId");
         deleteAlbum(deleteIt);
     });
@@ -144,6 +144,7 @@ $(document).ready(function () {
                 console.log("small");
             } else {
                 console.log("big");
+                myAudio.pause();
                 deleteAlbumId = $("#player").data("playerCurrentAlbumId");
             }
             $("#player").data("deleteAlbumId", deleteAlbumId);
@@ -399,7 +400,6 @@ $(document).ready(function () {
             }
         });
     }
-<<<<<<< HEAD
 /////search/////////////////////////////////////////////////////
     function searchAlbum() {
         var search = $('#searchBox').val();
@@ -426,6 +426,3 @@ $(document).ready(function () {
         }
     }
 });
-=======
-});
->>>>>>> a6b9f23f47d8cd36b4f10fe079986c8a6f4fed62
