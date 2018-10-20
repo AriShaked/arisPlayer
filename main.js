@@ -1,36 +1,13 @@
 $(document).ready(function () {
-
+    var allAlbumsData;
+    
     hidePlayer();
 
     getAllAlbums();
     ///////////////////////////////////searchBox ( on keyup --->  search for match    )   ///////////////////////////////
     $('#searchBox').keyup(function () {
-
+        
         searchAlbum();
-
-        function searchAlbum() {
-            var search = $('#searchBox').val();
-            if (search.length > 1) {
-                $("#container").html("");
-                var filter = search.toUpperCase();
-                var allAlbums = $("body").data("AlbumsData");
-                var albumsData = allAlbums.data;
-                searchResult = [];
-                for (let index = 0; index < albumsData.length; index++) {
-                    var upperCaseLoopSongs = albumsData[index].name.toUpperCase();
-
-                    if (upperCaseLoopSongs.indexOf(filter) > -1) {
-                        searchResult.push(albumsData[index]);
-                        $("#container").html("");
-                        drawAlbums(searchResult);
-                    }
-                }
-            } else {
-                console.log("2 letters minimum");
-                $("#container").html("");
-                getAllAlbums();
-            }
-        }
     });
     ///////////////ask the server for all playlists(albums) ////////////////////////////////////////////////
     function getAllAlbums() {
@@ -38,7 +15,7 @@ $(document).ready(function () {
             method: 'GET',
             url: `http://localhost/playlist/api/playlist`,
             success: function (data) {
-                var allAlbumsData = data;
+                allAlbumsData = data;
                 $("body").data("AlbumsData", allAlbumsData);
                 drawAlbums(data.data);
             }
@@ -67,6 +44,7 @@ $(document).ready(function () {
     }
     ///////////////////// DELETE   ------  on click gets album id and send ajax delete request to the server/////
     $("#deleteAlbumYesButton").on('click', function () {
+        myAudio.pause();
         var deleteIt = $("#player").data("deleteAlbumId");
         deleteAlbum(deleteIt);
     });
@@ -421,5 +399,30 @@ $(document).ready(function () {
                 $("title").html("player");
             }
         });
+    }
+/////search/////////////////////////////////////////////////////
+    function searchAlbum() {
+        var search = $('#searchBox').val();
+        if (search.length > 1) {
+            $("#container").html("");
+            var filter = search.toUpperCase();
+            // var allAlbums = $("body").data("AlbumsData");
+            var allAlbums =allAlbumsData ; 
+            var albumsData = allAlbums.data;
+            searchResult = [];
+            for (let index = 0; index < albumsData.length; index++) {
+                var upperCaseLoopSongs = albumsData[index].name.toUpperCase();
+
+                if (upperCaseLoopSongs.indexOf(filter) > -1) {
+                    searchResult.push(albumsData[index]);
+                    $("#container").html("");
+                    drawAlbums(searchResult);
+                }
+            }
+        } else {
+            console.log("2 letters minimum");
+            $("#container").html("");
+            getAllAlbums();
+        }
     }
 });
